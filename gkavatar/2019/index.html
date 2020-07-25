@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高考加油头像生成 | 客页 KEEER</title>
+    <style>
+        [hidden] {
+            display: none;
+        }
+        #result {
+            width: 100%;
+            max-width: 512px;
+        }
+        #div-upload, #div-result {
+            text-align: center;
+        }
+        #about {
+            padding: 16px;
+        }
+        #upload-avatar {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+        body {
+            background: #fff;
+            --mdc-theme-primary: #c62828;
+            margin: 0;
+            color: #002d4d;
+            background-color: #f5fafd;
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:link:hover {
+            text-decoration: underline;
+        }
+        #logolink {
+            text-decoration: none !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/button@0.44.1/dist/mdc.button.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/top-app-bar@0.44.1/dist/mdc.top-app-bar.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/typography@0.44.1/dist/mdc.typography.min.css">
+</head>
+<body class="mdc-typography">
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <span class="mdc-top-app-bar__title">RDFZ高考加油头像生成器</span>
+            </section>
+        </div>
+    </header>
+    <div id="div-upload" class="mdc-top-app-bar--fixed-adjust">
+        <button id="upload-avatar" class="mdc-button mdc-button--raised" data-mdc-auto-init="MDCRipple">上传你的头像</button>
+        <hr />
+        <div id="about">
+            <h2 class="mdc-typography--headline4">版权</h2>
+            <h3 class="mdc-typography--headline6"><a href="https://mp.weixin.qq.com/s/PM4si2N2hZIvxSTcsCq4UA">头像Cover</a></h3>
+            <p class="mdc-typography--body1">
+                <a href="https://mp.weixin.qq.com/s/8r4noZDm21lyVtZR9VGMHw">原制作授权 \ 王孟瑜</a><br />
+                <span class="mdc-typography--body2">
+                    仅供黄庄一中学子使用<br />
+                    请勿用于其他用途<br />
+                </span>
+                技术支持 \ BillStark001 追<br />
+                旧瓶装新酒的新年魔改 \ OSB
+            </p>
+            <h3 class="mdc-typography--headline6"><a href="">本页面</a></h3>
+            <p class="mdc-typography--body1">Alan-Liang @ KEEER, 2019</p>
+            <h2 class="mdc-typography--headline4">隐私</h2>
+            <p class="mdc-typography--body1">
+                我们<strong>不上传</strong>您的头像到我们的服务器(我们也没有那些带宽)，而是下载一个头像的Cover到您的设备上进行合成。
+                我们仅收集您使用的情况，并进行统计，使我们的服务更好。
+            </p>
+            <p class="mdc-typography--body1">
+                根据GDPR条款，我们<strong>禁止</strong>欧盟地区用户使用本项目。
+            </p>
+            <p class="mdc-typography--body1"><a href="https://services.keeer.net/gkavatar/2020/?utm_source=gk19">点击此处查看 2020 版。</a></p>
+            <a href="https://keeer.net/" id="logolink"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" /></a>
+        </div>
+    </div>
+    <div id="div-result" hidden class="mdc-top-app-bar--fixed-adjust">
+        <p>长按下方图片保存</p>
+        <img id="result" />
+        <p><button id="back" class="mdc-button" data-mdc-auto-init="MDCRipple">返回</button></p>
+    </div>
+    <input type="file" id="image" accept="image/*" hidden>
+    <canvas id="draw" hidden width="2000" height="2000"></canvas>
+    <script>
+        HTMLElement.prototype.show = function(){
+            this.style.display = 'block'
+        }
+        HTMLElement.prototype.hide=function(){
+            this.style.display = 'none'
+        }
+        var $ = function(s) {return document.getElementById(s)}
+        var cover = new Image()
+        cover.crossOrigin = 'anonymous'
+        cover.src = 'https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/cover.png'
+        $('upload-avatar').onclick = function() {
+            ga('send', 'event', 'upload-click')
+            $('image').click()
+        }
+        $('image').onchange = function() {
+            ga('send', 'event', 'avatar')
+            $('upload-avatar').disabled = true
+            if(!cover.complete) {
+                cover.onload = paint
+            } else {
+                paint()
+            }
+            function paint() {
+                var avatar = new Image()
+                avatar.onload = paint1
+                avatar.src = URL.createObjectURL($('image').files[0])
+                $('image').value = ''
+                function paint1() {
+                    var ratio = Math.min(avatar.width, avatar.height) / 2000
+                    var ctx = $('draw').getContext('2d')
+                    ctx.drawImage(avatar, 0, 0, avatar.width / ratio, avatar.height / ratio)
+                    ctx.drawImage(cover, 0, 0, 2000, 2000)
+                    $('result').src = $('draw').toDataURL()
+                    $('div-upload').hide()
+                    $('div-result').show()
+                    $('upload-avatar').disabled = false
+                }
+            }
+        }
+        $('back').onclick = function() {
+            $('div-upload').show()
+            $('div-result').hide()
+        }
+    </script>
+    <script>
+        window.GoogleAnalyticsObject = 'ga'
+        window.ga = window.ga || function() {
+            ;(window.ga.q = window.ga.q || []).push(arguments)
+        }
+        window.ga.l = 1 * new Date()
+        ga('create', 'UA-135036985-2', 'auto')
+        ga('send', 'pageview')
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+</body>
+</html>

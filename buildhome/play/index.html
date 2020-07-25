@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Buildhome</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://keeer-pub.oss-cn-beijing.aliyuncs.com/ggj18/dist/webgl/TemplateData/style.css">
+    <script src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/ggj18/dist/webgl/TemplateData/UnityProgress.js"></script>  
+    <script src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/ggj18/dist/webgl/Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "https://keeer-pub.oss-cn-beijing.aliyuncs.com/ggj18/dist/webgl/Build/Buildhome.json", {onProgress: UnityProgress});
+    </script>
+    <script>
+    window.GoogleAnalyticsObject = 'ga'
+    window.ga = window.ga || function() {
+      ;(window.ga.q = window.ga.q || []).push(arguments)
+    }
+    window.ga.l = 1 * new Date()
+    ga('create', 'UA-135036985-1', 'auto')
+    ga('send', 'pageview')
+    </script>
+    <script async src="https://www.google-analytics.com/analytics.js"></script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="gameContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+        <div class="title">Buildhome</div>
+      </div>
+    </div>
+  </body>
+</html>
