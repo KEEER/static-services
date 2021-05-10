@@ -11,7 +11,10 @@
       width: 100%;
       height: 100%;
       margin: 0;
-      display: table;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       background-color: #f5fafd;
       color: #002d4d;
@@ -81,10 +84,10 @@
   <body>
     <div id="wrapper">
       <p>在电脑上打开此页；</p>
-      <a class="link" href="javascript:document.getElementById('pageContent').contentDocument.getElementById('pageContent').contentDocument.querySelectorAll('[value*=&quot;A.很好&quot;]').forEach(function(el){el.parentElement.parentElement.click()});" onclick="javascript:alert('不要点我！拖我！');event.preventDefault();">自动评教</a>←拖我到浏览器书签栏(Win/Linux) / 右键复制链接，粘贴至任意书签(Mac)
+      <a class="link" href="javascript:(function(cd,d,c){var q=function(s){return Array.from(cd.querySelectorAll(d(s)))},a=q('[value*=&quot;A.%E5%BE%88%E5%A5%BD&quot;]'),b=q('[value*=&quot;B.%E5%A5%BD&quot;]');a.map(function(c,i){return Math.random()>.5?c:b[i]}).forEach(c)})(document.getElementById('pageContent').contentDocument.getElementById('pageContent').contentDocument,decodeURIComponent,function(el){el.parentElement.parentElement.click()});" onclick="javascript:alert('不要点我！拖我！');event.preventDefault();">自动评教</a>←拖我到浏览器书签栏(Windows/Linux) / 右键复制链接，粘贴至任意书签(Mac)
       <p>然后在评教页面点击这个标签，最后提交。</p>
-      <p>客页KEEER良心出品。</p>
-      <p>显示书签栏方法：Chrome：按 ctrl+shift+B；Firefox：在标签栏的空白处点击右键，并选中“书签工具栏”；360浏览器：在标题栏上点击右键，并选中“收藏栏”</p>
+      <p>客页 KEEER 良心出品。</p>
+      <p>显示书签栏方法：Chrome：按 ctrl+shift+B；Firefox：在标签栏的空白处点击右键，并选中“书签工具栏”；360 浏览器：在标题栏上点击右键，并选中“收藏栏”</p>
       <a href="https://keeer.net/?utm_source=autolzy"><img id="logo" src="https://keeer.net/img/logo/dark-large.svg" alt="KEEER Logo" /></a>
     </div>
   </body>
