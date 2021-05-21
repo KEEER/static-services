@@ -110,6 +110,7 @@ var debounce = function debounce(func, wait) {
 
 var sendEvent = function sendEvent(name) {
   ga('send', 'event', name);
+  if (window.umami) umami(name);
   fetch('https://log.keeer.net/', {
     method: 'post',
     body: name

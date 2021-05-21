@@ -101,10 +101,12 @@
         cover.src = 'https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/cover.png'
         $('upload-avatar').onclick = function() {
             ga('send', 'event', 'upload-click')
+            ; (window.umami||function(){})('upload-click')
             $('image').click()
         }
         $('image').onchange = function() {
             ga('send', 'event', 'avatar')
+            ; (window.umami||function(){})('avatar')
             $('upload-avatar').disabled = true
             if(!cover.complete) {
                 cover.onload = paint
@@ -143,5 +145,6 @@
         ga('send', 'pageview')
     </script>
     <script async src="https://www.google-analytics.com/analytics.js"></script>
+    <script async defer data-website-id="6c1140a2-b5f9-421f-9ba6-6acf251d10c2" src="https://umami.keeer.net/umami.js"></script>
 </body>
 </html>
