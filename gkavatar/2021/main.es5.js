@@ -92,7 +92,7 @@ blurSlider.listen('MDCSlider:input', debounce(function () {
   blurBgs.forEach(function (el) {
     return el.style.filter = "blur(".concat(parseInt(window.getComputedStyle(el).width) * blurSlider.value * blurFactor, "px)");
   });
-}, 100));
+}, 200));
 
 var blurSupported = function () {
   var canvas = document.createElement('canvas');
@@ -105,8 +105,10 @@ var blurrable = function blurrable(currentStyle) {
 };
 
 styleButtons.forEach(function (b, i) {
-  return b.addEventListener('click', function () {
-    return chooseStyle(i);
+  return b.addEventListener('click', function (e) {
+    e.preventDefault();
+    chooseStyle(i);
+    document.getSelection().removeAllRanges();
   });
 });
 var currentStyleClass = 'style__current';
@@ -134,6 +136,7 @@ uploadEl.addEventListener('change', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          sendEvent('upload-done');
           uploadButton.disabled = true;
           avatarSrc = URL.createObjectURL(uploadEl.files[0]);
           styleBgs.forEach(function (i) {
@@ -143,7 +146,7 @@ uploadEl.addEventListener('change', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*
           chooseStyle(0);
           uploadButton.disabled = false;
 
-        case 6:
+        case 7:
         case "end":
           return _context.stop();
       }
