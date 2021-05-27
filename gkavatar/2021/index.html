@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDFZ 高考加油头像生成 - 2021 - 客页 | KEEER</title>
+    <script>
+      // bypass vercel's alias of /2021 and /2021/
+      if (location.href.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/button@0.44.1/dist/mdc.button.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/top-app-bar@0.44.1/dist/mdc.top-app-bar.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/typography@0.44.1/dist/mdc.typography.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/card@3.1.0/dist/mdc.card.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/ripple@3.1.0/dist/mdc.ripple.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/slider@3.1.0/dist/mdc.slider.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../years.css">
+  </head>
+  <body class="mdc-typography">
+    <script>
+      if (/iP(hone|ad|od)/i.test(navigator.userAgent)) document.body.classList.add('buggy-safari')
+    </script>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title">RDFZ 高考加油头像生成 - 2021</span>
+        </section>
+      </div>
+    </header>
+    <main class="mdc-top-app-bar--fixed-adjust">
+      <div id="step-select">
+        <p id="banner"><button id="upload-avatar" class="mdc-button mdc-button--raised umami--click--upload">选择你的头像</button></p>
+        <input type="file" id="image" accept="image/*" hidden>
+        <div id="about">
+          <h2 class="mdc-typography--headline4">版权</h2>
+          <p class="mdc-typography--body1">Cover：追</p>
+          <p class="mdc-typography--body1">程序：Alan-Liang @ KEEER, 2021</p>
+          <h2 class="mdc-typography--headline4">隐私</h2>
+          <p class="mdc-typography--body1">
+            我们<strong>不上传</strong>您的头像到我们的服务器（我们也没有那些带宽），而是下载一个头像的 Cover 到您的设备上进行合成。
+            我们仅收集您使用的情况，并进行统计，使我们的服务更好。
+          </p>
+          <p class="mdc-typography--body1">
+            根据 GDPR 条款，我们<strong>禁止</strong>欧盟地区用户使用本项目。
+          </p>
+          <h2 class="mdc-typography--headline4">版本</h2>
+          <div class="years mdc-typography--body1">
+            <a class="years__link years__last mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2020/?utm_source=gk21" data-ripple>← 2020</a>
+            <div class="years__next years__disabled">来年再会！</div>
+          </div>
+          <a href="https://keeer.net/" id="logolink"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" /></a>
+      </div>
+      </div>
+      <div id="step-edit" style="display: none;">
+        <canvas id="paint-canvas" width="1080" height="1080" hidden></canvas>
+        <br>
+        <div id="styles">
+          <p class="mdc-typography--body1">您可以选择下面的几个图标样式：</p>
+          <div id="styles-container">
+            <div id="style-0" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-0" data-ripple>
+              <img class="style__bg style__bg-blur">
+              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/0.png">
+            </div>
+            <div id="style-1" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-1" data-ripple>
+              <img class="style__bg style__bg-blur">
+              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/1.png">
+            </div>
+            <div id="style-2" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-2" data-ripple>
+              <img class="style__bg">
+              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/2.png">
+            </div>
+            <div id="style-3" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-3" data-ripple>
+              <img class="style__bg">
+              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/3.png">
+            </div>
+          </div>
+        </div>
+        <div id="blur-container">
+          <p class="mdc-typography--body1">背景模糊：</p>
+          <div id="blur-slider" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0" aria-label="Blur radius">
+            <div class="mdc-slider__track-container"><div class="mdc-slider__track"></div></div>
+            <div class="mdc-slider__thumb-container"><svg class="mdc-slider__thumb" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="mdc-slider__focus-ring"></div></div>
+          </div>
+        </div>
+        <button id="save" class="mdc-button mdc-button--raised umami--click--save">确定</button>
+        <button id="back-1" class="mdc-button umami--click--back-1">返回</button>
+      </div>
+      <div id="step-save" style="display: none;">
+        <p>请长按下方图片保存。</p>
+        <img id="result-image">
+        <p><button id="back" class="mdc-button mdc-button--outlined umami--click--back">返回</button></p>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@material/ripple@3.1.0/dist/mdc.ripple.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@material/slider@3.1.0/dist/mdc.slider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.5/runtime.js"></script>
+    <script src="main.es5.js"></script>
+    <script async defer data-cache data-website-id="164c5ad8-2a38-4960-bfa1-62cd242141cd" src="https://umami.keeer.net/umami.js"></script>
+  </body>
+</html>
+
+<!--
+  愿为江水，与君重逢。
+  Alan-Liang
+  2021/5/27
+-->
