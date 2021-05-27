@@ -142,7 +142,7 @@ uploadEl.addEventListener('change', function () {
   uploadButton.disabled = false;
 });
 saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-  var fgImagePromise, canvas, ctx;
+  var fgImagePromise, canvas, ctx, exportType, resultUrl;
   return regeneratorRuntime.wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -162,7 +162,13 @@ saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
           canvas = document.createElement('canvas');
           canvas.width = canvas.height = fgSize;
           ctx = canvas.getContext('2d');
-          if (blurrable(currentStyle)) ctx.filter = "blur(".concat(fgSize * blurSlider.value * blurFactor, "px)");
+
+          if (blurrable(currentStyle)) {
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, fgSize, fgSize);
+            ctx.filter = "blur(".concat(fgSize * blurSlider.value * blurFactor, "px)");
+          }
+
           ctx.drawImage(styleBgs[0], 0, 0, fgSize, fgSize);
           ctx.filter = 'blur(0px)';
           _context.t0 = ctx;
@@ -176,19 +182,35 @@ saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
 
           _context.t0.drawImage.call(_context.t0, _context.t1, 0, 0, _context.t2, _context.t3);
 
-          _context.t4 = URL;
-          _context.next = 20;
+          exportType = 'image/jpeg';
+
+          if (!/micromess/i.test(navigator.userAgent)) {
+            _context.next = 22;
+            break;
+          }
+
+          _context.t4 = canvas.toDataURL(exportType);
+          _context.next = 27;
+          break;
+
+        case 22:
+          _context.t5 = URL;
+          _context.next = 25;
           return new Promise(function (resolve) {
-            return canvas.toBlob(resolve);
+            return canvas.toBlob(resolve, exportType);
           });
 
-        case 20:
-          _context.t5 = _context.sent;
-          resultImageEl.src = _context.t4.createObjectURL.call(_context.t4, _context.t5);
+        case 25:
+          _context.t6 = _context.sent;
+          _context.t4 = _context.t5.createObjectURL.call(_context.t5, _context.t6);
+
+        case 27:
+          resultUrl = _context.t4;
+          resultImageEl.src = resultUrl;
           focusStep(2);
           saveButton.disabled = false;
 
-        case 24:
+        case 31:
         case "end":
           return _context.stop();
       }
