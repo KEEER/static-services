@@ -42,6 +42,7 @@ var resultImageEl = $('#result-image');
 var backButton = $('#back');
 var back1Button = $('#back-1');
 var blurContainer = $('#blur-container');
+var saveStatusEl = $('#save-status');
 var styles = [0, 1, 2, 3].map(function (i) {
   return "https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/".concat(i, ".png");
 });
@@ -137,20 +138,31 @@ uploadEl.addEventListener('change', function () {
   styleBgs.forEach(function (i) {
     return i.src = avatarSrc;
   });
+  hide(saveStatusEl);
   focusStep(1);
   chooseStyle(0);
   uploadButton.disabled = false;
 });
 saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-  var fgImagePromise, canvas, ctx, exportType, resultUrl;
+  var done, setStatus, fgImagePromise, canvas, ctx, fgImage, exportType, resultUrl;
   return regeneratorRuntime.wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          done = false;
+          setTimeout(function () {
+            if (done) return;
+            show(saveStatusEl);
+          }, 1000);
+
+          setStatus = function setStatus(status) {
+            return saveStatusEl.innerText = status;
+          };
+
           sendEvent("save-".concat(currentStyle));
           if (blurrable(currentStyle)) sendEvent("save-blur-".concat(blurSlider.value !== 0));
           saveButton.disabled = true;
-          fgImagePromise = new Promise(function (resolve) {
+          fgImagePromise = new Promise(function (resolve, reject) {
             var img = new Image();
             img.src = styles[currentStyle];
             img.setAttribute('crossorigin', 'anonymous');
@@ -158,7 +170,10 @@ saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
             img.onload = function () {
               return resolve(img);
             };
+
+            img.onerror = reject;
           });
+          setStatus('正在擦拭黑板……');
           canvas = document.createElement('canvas');
           canvas.width = canvas.height = fgSize;
           ctx = canvas.getContext('2d');
@@ -171,51 +186,70 @@ saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
 
           ctx.drawImage(styleBgs[0], 0, 0, fgSize, fgSize);
           ctx.filter = 'blur(0px)';
-          _context.t0 = ctx;
-          _context.next = 13;
+          setStatus('正在寻找粉笔……');
+          _context.prev = 15;
+          _context.next = 18;
           return fgImagePromise;
 
-        case 13:
-          _context.t1 = _context.sent;
-          _context.t2 = fgSize;
-          _context.t3 = fgSize;
+        case 18:
+          fgImage = _context.sent;
+          setStatus('正在绘制板报……'); // next tick
 
-          _context.t0.drawImage.call(_context.t0, _context.t1, 0, 0, _context.t2, _context.t3);
+          _context.next = 22;
+          return Promise.resolve();
 
+        case 22:
+          ctx.drawImage(fgImage, 0, 0, fgSize, fgSize);
+          _context.next = 32;
+          break;
+
+        case 25:
+          _context.prev = 25;
+          _context.t0 = _context["catch"](15);
+          setStatus('网络错误');
+          alert('无法下载蒙版图片，请检查您的互联网连接。');
+          console.error(_context.t0);
+          saveButton.disabled = false;
+          return _context.abrupt("return");
+
+        case 32:
+          setStatus('正在拍照……');
           exportType = 'image/jpeg';
 
           if (!/micromess/i.test(navigator.userAgent)) {
-            _context.next = 22;
+            _context.next = 38;
             break;
           }
 
-          _context.t4 = canvas.toDataURL(exportType);
-          _context.next = 27;
+          _context.t1 = canvas.toDataURL(exportType);
+          _context.next = 43;
           break;
 
-        case 22:
-          _context.t5 = URL;
-          _context.next = 25;
+        case 38:
+          _context.t2 = URL;
+          _context.next = 41;
           return new Promise(function (resolve) {
             return canvas.toBlob(resolve, exportType);
           });
 
-        case 25:
-          _context.t6 = _context.sent;
-          _context.t4 = _context.t5.createObjectURL.call(_context.t5, _context.t6);
+        case 41:
+          _context.t3 = _context.sent;
+          _context.t1 = _context.t2.createObjectURL.call(_context.t2, _context.t3);
 
-        case 27:
-          resultUrl = _context.t4;
+        case 43:
+          resultUrl = _context.t1;
           resultImageEl.src = resultUrl;
           focusStep(2);
           saveButton.disabled = false;
+          done = true;
+          setStatus('');
 
-        case 31:
+        case 49:
         case "end":
           return _context.stop();
       }
     }
-  }, _callee);
+  }, _callee, null, [[15, 25]]);
 })));
 backButton.addEventListener('click', function () {
   focusStep(0);
