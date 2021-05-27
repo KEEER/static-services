@@ -130,34 +130,22 @@ var sendEvent = function sendEvent(name) {
 uploadButton.addEventListener('click', function () {
   uploadEl.click();
 });
-uploadEl.addEventListener('change', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-  var avatarSrc;
+uploadEl.addEventListener('change', function () {
+  sendEvent('upload-done');
+  uploadButton.disabled = true;
+  var avatarSrc = URL.createObjectURL(uploadEl.files[0]);
+  styleBgs.forEach(function (i) {
+    return i.src = avatarSrc;
+  });
+  focusStep(1);
+  chooseStyle(0);
+  uploadButton.disabled = false;
+});
+saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  var fgImagePromise, canvas, ctx;
   return regeneratorRuntime.wrap(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
-        case 0:
-          sendEvent('upload-done');
-          uploadButton.disabled = true;
-          avatarSrc = URL.createObjectURL(uploadEl.files[0]);
-          styleBgs.forEach(function (i) {
-            return i.src = avatarSrc;
-          });
-          focusStep(1);
-          chooseStyle(0);
-          uploadButton.disabled = false;
-
-        case 7:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _callee);
-})));
-saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-  var fgImagePromise, canvas, ctx;
-  return regeneratorRuntime.wrap(function _callee2$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
         case 0:
           sendEvent("save-".concat(currentStyle));
           if (blurrable(currentStyle)) sendEvent("save-blur-".concat(blurSlider.value !== 0));
@@ -177,35 +165,35 @@ saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
           if (blurrable(currentStyle)) ctx.filter = "blur(".concat(fgSize * blurSlider.value * blurFactor, "px)");
           ctx.drawImage(styleBgs[0], 0, 0, fgSize, fgSize);
           ctx.filter = 'blur(0px)';
-          _context2.t0 = ctx;
-          _context2.next = 13;
+          _context.t0 = ctx;
+          _context.next = 13;
           return fgImagePromise;
 
         case 13:
-          _context2.t1 = _context2.sent;
-          _context2.t2 = fgSize;
-          _context2.t3 = fgSize;
+          _context.t1 = _context.sent;
+          _context.t2 = fgSize;
+          _context.t3 = fgSize;
 
-          _context2.t0.drawImage.call(_context2.t0, _context2.t1, 0, 0, _context2.t2, _context2.t3);
+          _context.t0.drawImage.call(_context.t0, _context.t1, 0, 0, _context.t2, _context.t3);
 
-          _context2.t4 = URL;
-          _context2.next = 20;
+          _context.t4 = URL;
+          _context.next = 20;
           return new Promise(function (resolve) {
             return canvas.toBlob(resolve);
           });
 
         case 20:
-          _context2.t5 = _context2.sent;
-          resultImageEl.src = _context2.t4.createObjectURL.call(_context2.t4, _context2.t5);
+          _context.t5 = _context.sent;
+          resultImageEl.src = _context.t4.createObjectURL.call(_context.t4, _context.t5);
           focusStep(2);
           saveButton.disabled = false;
 
         case 24:
         case "end":
-          return _context2.stop();
+          return _context.stop();
       }
     }
-  }, _callee2);
+  }, _callee);
 })));
 backButton.addEventListener('click', function () {
   focusStep(0);
