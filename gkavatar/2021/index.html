@@ -6,7 +6,7 @@
     <title>RDFZ 高考加油头像生成 - 2021 - 客页 | KEEER</title>
     <script>
       // bypass vercel's alias of /2021 and /2021/
-      if (location.href.startsWith('https') && !location.href.endsWith('.html') && !location.href.endsWith('/')) location.href = location.href + '/'
+      if (location.pathname.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/button@0.44.1/dist/mdc.button.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/top-app-bar@0.44.1/dist/mdc.top-app-bar.min.css">
@@ -99,3 +99,9 @@
     <script async defer data-cache data-website-id="164c5ad8-2a38-4960-bfa1-62cd242141cd" src="https://umami.keeer.net/umami.js"></script>
   </body>
 </html>
+
+<!--
+  愿为江水，与君重逢。
+  Alan-Liang
+  2021/5/27
+-->
