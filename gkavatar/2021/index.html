@@ -6,7 +6,7 @@
     <title>RDFZ 高考加油头像生成 - 2021 - 客页 | KEEER</title>
     <script>
       // bypass vercel's alias of /2021 and /2021/
-      if (location.pathname.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
+      if (location.href.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/button@0.44.1/dist/mdc.button.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/top-app-bar@0.44.1/dist/mdc.top-app-bar.min.css">
