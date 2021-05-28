@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/slider@3.1.0/dist/mdc.slider.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../years.css">
+
+    <meta name="description" content="为 2021 届高考的 RDFZer 们加油。">
   </head>
   <body class="mdc-typography">
     <script>
@@ -58,7 +60,7 @@
             <a class="years__link years__last mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2020/?utm_source=gk21" data-ripple>← 2020</a>
             <div class="years__next years__disabled">来年再会！</div>
           </div>
-          <a href="https://keeer.net/" id="logolink"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" /></a>
+          <a href="https://keeer.net/" id="logolink" aria-label="KEEER"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" alt="KEEER Logo" /></a>
       </div>
       </div>
       <div id="step-edit" style="display: none;">
@@ -68,20 +70,20 @@
           <p class="mdc-typography--body1">您可以选择下面的几个图标样式：</p>
           <div id="styles-container">
             <div id="style-0" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-0" data-ripple>
-              <img class="style__bg style__bg-blur">
-              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/0.png">
+              <img class="style__bg style__bg-blur" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/0.png" alt="Cover style 1">
             </div>
             <div id="style-1" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-1" data-ripple>
-              <img class="style__bg style__bg-blur">
-              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/1.png">
+              <img class="style__bg style__bg-blur" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/1.png" alt="Cover style 2">
             </div>
             <div id="style-2" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-2" data-ripple>
-              <img class="style__bg">
-              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/2.png">
+              <img class="style__bg" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/2.png" alt="Cover style 3">
             </div>
             <div id="style-3" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-3" data-ripple>
-              <img class="style__bg">
-              <img class="style__fg" src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/3.png">
+              <img class="style__bg" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2021/thumbnail/3.png" alt="Cover style 4">
             </div>
           </div>
         </div>
@@ -98,7 +100,7 @@
       </div>
       <div id="step-save" style="display: none;">
         <p>请长按下方图片保存。</p>
-        <img id="result-image">
+        <img id="result-image" alt="Generated avatar">
         <p><button id="back" class="mdc-button mdc-button--outlined umami--click--back">返回</button></p>
       </div>
     </main>

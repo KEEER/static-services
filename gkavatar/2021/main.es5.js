@@ -266,10 +266,17 @@ try {
   for (_iterator.s(); !(_step = _iterator.n()).done;) {
     var el = _step.value;
     mdc.ripple.MDCRipple.attachTo(el);
-  }
+  } // load lazy-load images
+
 } catch (err) {
   _iterator.e(err);
 } finally {
   _iterator.f();
 }
+
+setTimeout(function () {
+  return $$('.style__fg').forEach(function (img) {
+    return img.src = img.getAttribute('data-src');
+  });
+}, 100);
 
