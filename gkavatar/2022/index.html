@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDFZ 高考加油头像生成 - 2022 - 客页 | KEEER</title>
+    <script>
+      // bypass vercel's alias of /2022 and /2022/
+      if (location.href.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
+    </script>
+
+    <link rel="preload" href="bundle.js" as="script">
+    <link rel="preload" href="main.es5.js" as="script">
+    <link rel="preload" href="https://keeer.net/img/logo/dark-large.svg" as="image">
+    <link rel="preload" href="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2020/banner.jpg" as="image">
+    <link rel="preconnect" href="https://umami.keeer.net">
+    <link rel="preconnect" href="https://keeer-pub.oss-cn-beijing.aliyuncs.com" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="bundle.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../years.css">
+
+    <meta name="description" content="为 2022 届高考的 RDFZer 们加油。">
+  </head>
+  <body class="mdc-typography">
+    <script>
+      if (/iP(hone|ad|od)/i.test(navigator.userAgent)) document.body.classList.add('buggy-safari')
+    </script>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title">RDFZ 高考加油头像生成 - 2022</span>
+        </section>
+      </div>
+    </header>
+    <main class="mdc-top-app-bar--fixed-adjust">
+      <div id="step-select">
+        <p id="banner"><button id="upload-avatar" class="mdc-button mdc-button--raised umami--click--upload">选择你的头像</button></p>
+        <input type="file" id="image" accept="image/*" hidden>
+        <div id="about">
+          <h2 class="mdc-typography--headline4">版权</h2>
+          <p class="mdc-typography--body1">Cover: 追</p>
+          <p class="mdc-typography--body1">程序: Alan-Liang @ KEEER, 2022</p>
+          <p class="mdc-typography--body1">联系: <a href="mailto:gka@altk.org">gka@altk.org</a></p>
+          <h2 class="mdc-typography--headline4">隐私</h2>
+          <p class="mdc-typography--body1">
+            我们不上传您的头像到我们的服务器（我们也没有那些带宽），而是下载一个头像的 Cover 到您的设备上进行合成。
+            我们仅收集您使用的情况，并进行统计，使我们的服务更好。
+          </p>
+          <p class="mdc-typography--body1">
+            由于 GDPR 条款的限制，我们禁止欧盟地区用户使用本项目。
+          </p>
+          <h2 class="mdc-typography--headline4">版本</h2>
+          <div class="years mdc-typography--body1">
+            <a class="years__link years__last mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2021/?utm_source=gk22" data-ripple>← 2021</a>
+            <div class="years__next years__disabled">来年再会！</div>
+          </div>
+          <a href="https://keeer.net/" id="logolink" aria-label="KEEER"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" alt="KEEER Logo" /></a>
+      </div>
+      </div>
+      <div id="step-edit" style="display: none;">
+        <canvas id="paint-canvas" width="1000" height="1000" hidden></canvas>
+        <br>
+        <div id="styles">
+          <p class="mdc-typography--body1">您可以选择下面的几个图标样式：</p>
+          <div id="styles-container">
+            <div id="style-0" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-0" data-ripple>
+              <img class="style__bg style__bg-blur" alt="Avatar">
+              <img id="cover-1-1" class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/1-1.png" alt="Cover style 1, layer 1">
+              <img id="cover-1-2" class="style__fg style__fg-overlay" style="opacity: 0.7" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/1-2.png" alt="Cover style 1, layer 2">
+            </div>
+            <div id="style-1" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-1" data-ripple>
+              <img class="style__bg style__bg-blur" alt="Avatar">
+              <img id="cover-2-1" class="style__fg" style="opacity: 0.6" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/2-1.png" alt="Cover style 2, layer 1">
+              <img id="cover-2-2" class="style__fg style__fg-overlay" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/2-2.png" alt="Cover style 2, layer 2">
+              <img id="cover-2-3" class="style__fg style__fg-overlay" style="opacity: 0.7" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/2-3.png" alt="Cover style 2, layer 3">
+            </div>
+            <div id="style-2" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-2" data-ripple>
+              <img class="style__bg" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/3.png" alt="Cover style 3">
+            </div>
+            <div id="style-3" class="style__container mdc-card mdc-card--outlined mdc-ripple-surface umami--click--style-3" data-ripple>
+              <img class="style__bg" alt="Avatar">
+              <img class="style__fg" data-src="https://keeer-pub.oss-cn-beijing.aliyuncs.com/rdfzgkavt/2022/thumb/4.png" alt="Cover style 4">
+            </div>
+          </div>
+        </div>
+        <div id="transparency-container">
+          <div id="transparency-slider-container-1">
+            <div class="mdc-typography--body2 style__label">文字透明度</div>
+            <div id="transparency-slider-1-2" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="0.5" aria-valuenow="0.3" aria-label="Transparency of layer 1-1">
+              <div class="mdc-slider__track-container"><div class="mdc-slider__track"></div></div>
+              <div class="mdc-slider__thumb-container"><svg class="mdc-slider__thumb" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="mdc-slider__focus-ring"></div></div>
+            </div>
+          </div>
+          <div id="transparency-slider-container-2">
+            <div class="mdc-typography--body2 style__label">文字透明度</div>
+            <div id="transparency-slider-2-3" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="0.5" aria-valuenow="0.3" aria-label="Transparency of layer 1-1">
+              <div class="mdc-slider__track-container"><div class="mdc-slider__track"></div></div>
+              <div class="mdc-slider__thumb-container"><svg class="mdc-slider__thumb" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="mdc-slider__focus-ring"></div></div>
+            </div>
+            <div class="mdc-typography--body2 style__label">边框透明度</div>
+            <div id="transparency-slider-2-1" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="0.5" aria-valuenow="0.4" aria-label="Transparency of layer 1-1">
+              <div class="mdc-slider__track-container"><div class="mdc-slider__track"></div></div>
+              <div class="mdc-slider__thumb-container"><svg class="mdc-slider__thumb" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="mdc-slider__focus-ring"></div></div>
+            </div>
+          </div>
+          <div class="mdc-typography--body2 style__label style__label--hint">
+            <span>← 不透明</span>
+            <span class="style__label--hint__spacer"></span>
+            <span>透明 →</span>
+          </div>
+        </div>
+        <div id="blur-container">
+          <div class="mdc-typography--body2 style__label">背景模糊</div>
+          <div id="blur-slider" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0" aria-label="Blur radius">
+            <div class="mdc-slider__track-container"><div class="mdc-slider__track"></div></div>
+            <div class="mdc-slider__thumb-container"><svg class="mdc-slider__thumb" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="mdc-slider__focus-ring"></div></div>
+          </div>
+          <div class="mdc-typography--body2 style__label style__label--hint">
+            <span>← 不模糊</span>
+            <span class="style__label--hint__spacer"></span>
+            <span>模糊 →</span>
+          </div>
+        </div>
+        <button id="save" class="mdc-button mdc-button--raised umami--click--save">生成</button>
+        <button id="back-1" class="mdc-button umami--click--back-1">返回</button>
+        <p id="save-status" style="display: none;" class="mdc-typography--body1"></p>
+      </div>
+      <div id="step-save" style="display: none;">
+        <p>请长按或右键点击下方图片保存。</p>
+        <img id="result-image" alt="Generated avatar">
+        <p><button id="back" class="mdc-button mdc-button--outlined umami--click--back">返回</button></p>
+      </div>
+    </main>
+    <script src="bundle.js"></script>
+    <script src="main.es5.js"></script>
+    <script async defer data-cache data-website-id="d0eb7af9-5631-4967-8f37-ac7e11303369" src="https://umami.keeer.net/umami.js"></script>
+  </body>
+</html>

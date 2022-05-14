@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDFZ 高考加油头像生成 - 客页 | KEEER</title>
+    <script>
+      if (location.href.startsWith('https') && !location.pathname.endsWith('.html') && !location.pathname.endsWith('/')) location.href = location.href.replace(location.pathname, location.pathname + '/')
+    </script>
+
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@material/ripple@3.1.0/dist/mdc.ripple.min.js" as="script">
+    <link rel="preload" href="thumb/2022.jpg" as="image">
+    <link rel="preload" href="thumb/2021.jpg" as="image">
+    <link rel="preload" href="thumb/2020.jpg" as="image">
+    <link rel="preload" href="thumb/2019.jpg" as="image">
+    <link rel="preload" href="https://keeer.net/img/logo/dark-large.svg" as="image">
+    <link rel="preconnect" href="https://umami.keeer.net">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/top-app-bar@0.44.1/dist/mdc.top-app-bar.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/typography@0.44.1/dist/mdc.typography.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@material/ripple@3.1.0/dist/mdc.ripple.min.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="mdc-typography">
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title">RDFZ 高考加油头像生成</span>
+        </section>
+      </div>
+    </header>
+    <main class="mdc-top-app-bar--fixed-adjust">
+      <!-- remember to add the image to the preload list above when adding items -->
+      <a class="year mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2022/?utm_source=all" data-ripple>
+        <img class="year__image" src="thumb/2022.jpg">
+        <span class="year__name">2022</span>
+        <span class="year__indicator"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></span>
+      </a>
+      <a class="year mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2021/?utm_source=all" data-ripple>
+        <img class="year__image" src="thumb/2021.jpg">
+        <span class="year__name">2021</span>
+        <span class="year__indicator"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></span>
+      </a>
+      <a class="year mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2020/?utm_source=all" data-ripple>
+        <img class="year__image" src="thumb/2020.jpg">
+        <span class="year__name">2020</span>
+        <span class="year__indicator"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></span>
+      </a>
+      <a class="year mdc-ripple-surface" href="https://services.keeer.net/gkavatar/2019/?utm_source=all" data-ripple>
+        <img class="year__image" src="thumb/2019.jpg">
+        <span class="year__name">2019</span>
+        <span class="year__indicator"><svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></span>
+      </a>
+    </main>
+    <a href="https://keeer.net/" id="logolink" aria-label="KEEER"><img src="https://keeer.net/img/logo/dark-large.svg" width="128px" alt="KEEER Logo" /></a>
+    <script src="https://cdn.jsdelivr.net/npm/@material/ripple@3.1.0/dist/mdc.ripple.min.js"></script>
+    <script>
+    var ripples = document.querySelectorAll('[data-ripple]')
+    for (var i = 0; i < ripples.length; ++i) {
+      mdc.ripple.MDCRipple.attachTo(ripples[i])
+    }
+    </script>
+    <script async defer data-website-id="5d840702-07e3-4812-8e41-bef636f19892" src="https://umami.keeer.net/umami.js"></script>
+  </body>
+</html>
