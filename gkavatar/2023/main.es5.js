@@ -301,36 +301,41 @@ cropButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__
       switch (_context3.prev = _context3.next) {
         case 0:
           cropButton.disabled = true;
-          _context3.prev = 1;
+          _context3.next = 3;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, 60);
+          });
+        case 3:
+          _context3.prev = 3;
           canvas = cropperInstance.getCroppedCanvas({
             width: fgSize,
             height: fgSize
           });
-          _context3.next = 5;
+          _context3.next = 7;
           return exportCanvas(canvas);
-        case 5:
+        case 7:
           url = _context3.sent;
           styleBgs.forEach(function (i) {
             return i.src = url;
           });
           focusStep(2);
           chooseStyle(0);
-          _context3.next = 14;
+          _context3.next = 16;
           break;
-        case 11:
-          _context3.prev = 11;
-          _context3.t0 = _context3["catch"](1);
+        case 13:
+          _context3.prev = 13;
+          _context3.t0 = _context3["catch"](3);
           alert("\u88C1\u526A\u8FC7\u7A0B\u4E2D\u51FA\u73B0\u9519\u8BEF: ".concat(_context3.t0));
-        case 14:
-          _context3.prev = 14;
+        case 16:
+          _context3.prev = 16;
           cropButton.disabled = false;
-          return _context3.finish(14);
-        case 17:
+          return _context3.finish(16);
+        case 19:
         case "end":
           return _context3.stop();
       }
     }
-  }, _callee3, null, [[1, 11, 14, 17]]);
+  }, _callee3, null, [[3, 13, 16, 19]]);
 })));
 saveButton.addEventListener('click', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
   var done, setStatus, logSlider, sliders, _iterator2, _step2, slider, fgImagePromise, imagePromises, canvas, ctx, drawLayer, fgImages, _iterator3, _step3, _transparencies$id, _step3$value, id, image, resultUrl;
